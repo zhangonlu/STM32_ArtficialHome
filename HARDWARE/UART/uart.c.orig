@@ -1,0 +1,70 @@
+#include "uart.h"
+
+
+
+/*
+PA9 -- uart1_tx
+PA10 -- uart1_rx
+
+*/
+
+
+void uart_init()
+{
+
+	//1.时钟使能 :IO口 和 UART
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA,ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+
+	//2.将引脚配置为复用功能
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_USART1);
+	GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_USART1);
+
+	//初始化
+	GPIO_InitTypeDef gpio_initstruct;
+	gpio_initstruct.GPIO_Mode = GPIO_Mode_AF;
+	gpio_initstruct.GPIO_Pin =   GPIO_Pin_9 | GPIO_Pin_10; 
+	GPIO_Init(GPIOA, &gpio_initstruct);
+	
+	USART_InitTypeDef USART_InitStruct;
+	USART_InitStruct.USART_BaudRate =  bound;
+	USART_InitStruct.USART_HardwareFlowControl = USART_HardwareFlowControl_None ;
+	USART_InitStruct.USART_Mode = USART_Mode_Tx | USART_Mode_Rx; 
+	USART_InitStruct.USART_Parity = USART_Parity_No;
+	USART_InitStruct.USART_StopBits =    USART_StopBits_1;
+	USART_InitStruct.USART_WordLength =  USART_WordLength_8b;
+	USART_Init(USART1,&USART_InitStruct);
+	
+	
+	USART_Cmd(USART1, ENABLE);
+	
+	 USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);//启用接收中断
+	 NVIC_InitTypeDef  NVIC_InitStruct;
+	 NVIC_InitStruct.NVIC_IRQChannel = USART1_IRQn; 
+	 NVIC_InitStruct.NVIC_IRQChannelCmd =   ENABLE;
+	 NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 2; 
+	 NVIC_InitStruct.NVIC_IRQChannelSubPriority = 2;
+	 NVIC_Init(&NVIC_InitStruct);
+	
+}
+
+
+#include "led.h"
+#include "beep.h"
+void USART1_IRQHandler()
+{
+	if( USART_GetITStatus(USART1, USART_IT_RXNE) == SET)
+	{
+	
+		u8 ret = USART_ReceiveData(USART1);
+		USART_SendData(USART1, ret);
+		if(ret == 0x1) LED1 = 0;
+		if(ret == 0x2)  LED1 = 1;
+		if(ret == 0x3)  BEEP = 0;
+		if(ret == 0x4) BEEP = 1;
+		
+		 USART_ClearITPendingBit(USART1,USART_IT_RXNE)  ;
+	}
+
+
+}

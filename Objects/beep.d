@@ -1,0 +1,17 @@
+.\objects\beep.o: HARDWARE\BEEP\beep.c
+.\objects\beep.o: C:\Users\zhangmingdong\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include\stm32f4xx.h
+.\objects\beep.o: C:\Users\zhangmingdong\AppData\Local\Arm\Packs\ARM\CMSIS\5.0.1\CMSIS\Include\core_cm4.h
+.\objects\beep.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\beep.o: C:\Users\zhangmingdong\AppData\Local\Arm\Packs\ARM\CMSIS\5.0.1\CMSIS\Include\cmsis_compiler.h
+.\objects\beep.o: C:\Users\zhangmingdong\AppData\Local\Arm\Packs\ARM\CMSIS\5.0.1\CMSIS\Include\cmsis_armcc.h
+.\objects\beep.o: C:\Users\zhangmingdong\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include\system_stm32f4xx.h
+.\objects\beep.o: .\RTE\Device\STM32F407VE\stm32f4xx_conf.h
+.\objects\beep.o: .\RTE\_project\RTE_Components.h
+.\objects\beep.o: C:\Users\zhangmingdong\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\stm32f4xx_gpio.h
+.\objects\beep.o: C:\Users\zhangmingdong\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include\stm32f4xx.h
+.\objects\beep.o: C:\Users\zhangmingdong\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\stm32f4xx_rcc.h
+.\objects\beep.o: C:\Users\zhangmingdong\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\stm32f4xx_tim.h
+.\objects\beep.o: C:\Users\zhangmingdong\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\stm32f4xx_usart.h
+.\objects\beep.o: C:\Users\zhangmingdong\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\StdPeriph_Driver\inc\misc.h
+.\objects\beep.o: HARDWARE\BEEP\beep.h
+.\objects\beep.o: .\SYSTEM\sys\sys.h

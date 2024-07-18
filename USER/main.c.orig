@@ -1,0 +1,50 @@
+#include "stm32f4xx.h"
+#include "FreeRTOSConfig.h"
+#include "led.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "delay.h"
+#include "uart.h"
+#include "wifi.h"
+#include "dht11.h"
+#include "string.h"
+#define toString(x) #x
+//回调函数
+void TaskFunction_t_LED(void *arg)
+{
+    led_init();
+	TIM7_Init();
+	uart1_init();
+	uart2_init();
+	wifi_init();
+	DHT11_Init();
+	TCP_Init();
+	char buf[100] = "";
+	
+	
+    while(1)
+    {      
+sprintf(buf,"LED1_open");		
+		 TCP_send((u8 *)buf,strlen(buf),1000);
+		vTaskDelay(1000);
+		sprintf(buf,"LED1_close");
+				 TCP_send((u8 *)buf,strlen(buf),1000);
+		vTaskDelay(1000);
+    }
+}
+int main()
+{
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);  //中断分组
+
+    //进入临界区
+    taskENTER_CRITICAL();
+
+    xTaskCreate( TaskFunction_t_LED,"LED",128,NULL,1,NULL);
+	
+	//退出临界区
+	taskEXIT_CRITICAL();
+	
+	//进入死循环 遍历任务链表
+	vTaskStartScheduler();
+	
+}
